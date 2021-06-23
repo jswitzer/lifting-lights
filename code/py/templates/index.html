@@ -1,0 +1,101 @@
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>Lights Prototype</title>
+  <link rel="stylesheet" href="static/style.css"/>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  function setLights(err, details) {
+    if (err) {
+      console.log("Could not get lights info ", err);
+    } else {
+      console.log("Got lights info ", JSON.stringify(details, null, 1));
+      if (details.lights) {
+        for (var key in details.lights) {
+          if (details.lights.hasOwnProperty(key)) {
+            var color = details.lights[key];
+            console.log("Setting light with id light_" + key + " to " + color);
+            var element = document.getElementById("light_" + key);
+            if (element) {
+              element.style.backgroundColor=color;
+            }
+          }
+        }
+      }
+    }
+  };
+
+  function buttonPressed(button_id) {
+    var jqxhr = $.post("button/" + button_id, function(rawResults) {
+    try {
+        var jsonResults = JSON.parse(rawResults);
+      } catch(err) {
+        return setLights("Could not parse " + rawResults);
+      }
+      setLights(null, jsonResults);
+    })
+    .fail(function() {
+      setLights("an error");
+    });
+  };
+
+  $(function(){
+    
+    var pollLights = function() {
+      var jqxhr = $.get("lights", function(rawResults) {
+        try {
+          var jsonResults = JSON.parse(rawResults);
+        } catch(err) {
+          return setLights("Could not parse " + rawResults);
+        }
+        setLights(null, jsonResults);
+      })
+      .fail(function() {
+        setLights("an error");
+      });
+      window.setTimeout(pollLights, 1000);
+    };
+    pollLights();
+  });
+    </script>
+    </head>
+    <body>
+        &nbsp;<br>
+        <div id="displayboard">
+            <div class="light" id="light_b_left_good"></div>
+            <div class="light" id="light_b_head_good"></div>
+            <div class="light" id="light_b_right_good"></div>
+
+            <div class="light" id="light_b_left_bad"></div>
+            <div class="light" id="light_b_head_bad"></div>
+            <div class="light" id="light_b_right_bad"></div>
+        </div>
+        &nbsp;<br>
+
+        <div id="remotecontainer">
+        <div id="headrefremote">
+            Center<br>
+            <button id="btn_head_good" onclick="buttonPressed(this.id)"> 
+              Good </button> <br>
+            <button id="btn_head_bad" onclick="buttonPressed(this.id)"> 
+              Bad </button> <br>
+            <button id="btn_head_reset" onclick="buttonPressed(this.id)"> 
+              Reset </button> <br>
+        </div>
+        <div id="leftrefremote">
+            Left <br>
+            <button id="btn_left_good" onclick="buttonPressed(this.id)"> 
+              Good </button> <br>
+            <button id="btn_left_bad" onclick="buttonPressed(this.id)"> 
+              Bad </button> <br>
+        </div>
+        <div id="rightrefremote">
+            Right <br>
+            <button id="btn_right_good" onclick="buttonPressed(this.id)"> 
+              Good </button> <br>
+            <button id="btn_right_bad" onclick="buttonPressed(this.id)"> 
+              Bad </button> <br>
+        </div>
+        </div>
+    </body>
+</html>

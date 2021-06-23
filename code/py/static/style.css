@@ -1,0 +1,78 @@
+
+#displayboard {
+  position: relative;
+  width: 600px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+#remotecontainer {
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+}
+
+#headrefremote {
+  max-width: 200px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  right: 200px;
+}
+
+#rightrefremote {
+  max-width: 200px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#leftrefremote {
+  max-width: 200px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  right: 400px;
+}
+
+
+.light {
+  position: absolute;
+  background-color: black;
+  width: 50px;
+  height: 50px;
+}
+
+#light_b_left_good {
+  top: 0;
+  right: 150px;
+}
+
+#light_b_head_good {
+  top: 0;
+  right: 75px;
+}
+
+#light_b_right_good {
+  top: 0;
+  right: 0px;
+}
+
+
+#light_b_left_bad {
+  top: 75px;
+  right: 150px;
+}
+
+#light_b_head_bad {
+  top: 75px;
+  right: 75px;
+}
+
+#light_b_right_bad {
+  top: 75px;
+  right: 0px;
+}
+
+

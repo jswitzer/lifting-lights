@@ -1,0 +1,29 @@
+
+From: https://www.adafruit.com/datasheets/FT232_Model.pdf
+
+1 Black -> Ground 
+2 CTS -> 
+3 5V 
+Orange -> TXD
+Yellow -> RXD
+Green -> RTS
+
+Our interface: 
+
+1 <- PIC RST (low == reset)
+2 <- XBEE RST (low = reset)
+3 <- 5V (in) 
+4 <- RXD
+5 <- TXD
+6 <- GROUND
+
+
+MALE   == TO TTL
+FEMALE == TO COMMS BOARD
+
+1 M  (gnd) (BLACK) -> 6 F (gnd)
+2 M -> NC
+3 M (5v) -> 3 F (5v) 
+4 RX
+
+
